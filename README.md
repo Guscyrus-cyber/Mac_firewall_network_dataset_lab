@@ -277,7 +277,7 @@ generate traffic\
 mac_ifconfig.log\
 mac_netstat.log\
 listening_ports.log\
-mac_network_capture.pcap\
+mac_network_capture.pcap
 
 Please refer to the images in the repository for the corresponding commands and terminal output screenshots. 
 
