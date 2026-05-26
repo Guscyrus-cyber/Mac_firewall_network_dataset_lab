@@ -1,6 +1,6 @@
-**\
-\
+
 Mac Firewall and Network Investigation Lab\
+
 File name: Mac_network_investigation_lab**
 
 **Introduction — Mac Firewall and Network Investigation Lab**
@@ -10,21 +10,21 @@ In this lab, a real-world firewall and network investigation was performed using
 Throughout the investigation, multiple datasets were generated from the macOS environment to provide visibility into network interfaces, active TCP and UDP sessions, open ports, local services, encrypted HTTPS communication, and packet-level traffic. These datasets were then organized into structured log and capture files that can later be reused for additional cybersecurity investigations, Splunk SIEM ingestion, packet analysis, threat hunting exercises, and firewall monitoring scenarios. The lab demonstrates how a local machine can be transformed into a practical cybersecurity investigation environment using native system activity and real network traffic.\
 \
 Main Goals
-===========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
 
 In this lab I will learn how to:
 
-inspect live network connections,\
-identify listening ports,\
-monitor active sessions,\
-inspect processes using the network,\
-analyze firewall/network logs,\
-detect suspicious IPs,\
-view TCP/UDP activity,\
-and perform basic threat hunting from terminal.\
+inspect live network connections
+identify listening ports
+monitor active sessions
+inspect processes using the network
+analyze firewall/network logs
+detect suspicious IPs
+view TCP/UDP activity
+and perform basic threat hunting from terminal
 \
 Terminal Tools We Will Use
-================================================
+
 
 | **Tool** | **Purpose** |
 |----------|-------------|
@@ -65,46 +65,7 @@ Terminal Tools We Will Use
 | head/tail | View beginning/end of logs |
 |-----------|----------------------------|
 
-**\
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
+
 Generate Real Data on Mac (Data Collection & Dataset Creation)\
 \
 Opening Terminal personal MacBook pro\
@@ -130,7 +91,7 @@ local IP address\
 MAC address\
 active network adapters\
 \
-**Step 2 — Show Active Network Connections\
+**Step 2 — Show Active Network Connections**\
 Command: netstat -an\
 \**
 This displays:
@@ -158,17 +119,17 @@ Google 1234 user TCP 192.168.1.193:51234-\>142.250.x.x:443
 
 It means: Chrome/Google process connected to remote HTTPS server on port 443.\
 \
-**Step 4 — Find Processes Listening on Ports\
-\**
-Command: **lsof -iTCP -sTCP:LISTEN -n -P\**
+**Step 4 — Find Processes Listening on Ports**\
+
+Command: **lsof -iTCP -sTCP:LISTEN -n -P**\**
 This identifies:
 
 services listening on your machine,\
 potentially exposed ports,\
 applications accepting incoming connections.\
 \
-Step 5 — Investigate Specific Ports
-=============================================
+**Step 5 — Investigate Specific Ports**
+
 
 Command: **lsof -i :443**
 
@@ -183,8 +144,8 @@ SSH activity,\
 who owns the port,\
 active sessions.\
 \
-Step 6 — Real-Time Connection Monitoring
-========================================
+**Step 6 — Real-Time Connection Monitoring**
+
 
 Command: **nettop**
 
@@ -197,7 +158,7 @@ process communication.
 
 **Step 7 — Packet Capture (Very Important SOC Skill)**
 
-Command: **sudo tcpdump -i en0**
+Command: sudo tcpdump -i en0
 
 This captures:
 
@@ -222,8 +183,8 @@ suspicious outbound traffic,\
 malware traffic investigation,\
 encrypted traffic monitoring.\
 \
-Step 9 — Save Traffic to PCAP File
-==================================
+**Step 9 — Save Traffic to PCAP File**
+
 
 Command: **sudo tcpdump -i en0 -w network_capture.pcap**
 
@@ -249,8 +210,8 @@ suspicious IP investigation,\
 malware beaconing,\
 outbound communication analysis.\
 \
-Step 11 — Count Connections Per IP
-==================================
+**Step 11 — Count Connections Per IP**
+
 
 Command: **netstat -an \| grep ESTABLISHED \| awk '{print \$5}' \| cut -d. -f1-4 \| sort \| uniq -c \| sort -nr**
 
@@ -260,8 +221,8 @@ top communicating IPs,\
 suspicious repetitive connections,\
 possible scanning or beaconing behavior.\
 \
-Step 12 — Investigate DNS Activity
-=========================================
+**Step 12 — Investigate DNS Activity**
+
 
 Command: **sudo tcpdump -i en0 port 53**
 
@@ -275,16 +236,16 @@ monitors DNS queries\
 \
 Step 13 through 17 Dataset generation\
 \
-Step 13 — Create Investigation Folder
-======================================
+**Step 13 — Create Investigation Folder**
+
 
 Command: cd ~/Downloads\
 mkdir mac_network_investigation_lab\
 cd mac_network_investigation_lab\
 pwd\
 \
-Step 14 — Create ifconfig Dataset
-====================================
+**Step 14 — Create ifconfig Dataset**
+
 
 Commasnd: ifconfig \> mac_ifconfig.log
 
@@ -295,10 +256,8 @@ ls -lh
 Command: netstat -an \> mac_netstat.log\
 ls -lh\
 \
-\
-\
-Step 16 — Create Listening Ports Dataset
-========================================
+**Step 16 — Create Listening Ports Dataset**
+
 
 Command: lsof -i -P -n \> listening_ports.log\
 **ls -lh**\
@@ -321,35 +280,9 @@ mac_netstat.log\
 listening_ports.log\
 mac_network_capture.pcap\
 \
-**Screenshots step 1 through 17\
-\
-\**
-\**
-\**
-\
-\**
 
-\
-\
-\
-\
+Please refer to the images in the repository for the corresponding commands and terminal output screenshots. 
 
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
 **SOC Skills Covered**
 
 This lab maps to:
@@ -358,16 +291,14 @@ Network Security Monitoring\
 Threat Hunting\
 Firewall Investigation\
 Packet Analysis
-
 Traffic Inspection\
 Incident Response\
 Tier-1 SOC Analyst Skills\
 Basic Tier-2 Investigation\
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\
-\
-\
-\
-===========================================================================================================================================
 
 \
-=
+
+
+
+
+
