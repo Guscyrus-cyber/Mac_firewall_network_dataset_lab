@@ -1,9 +1,9 @@
 
-Mac Firewall and Network Investigation Lab\
+Mac Firewall and Network Investigation Lab
 
-File name: Mac_network_investigation_lab**
+File name: Mac_network_investigation_lab
 
-**Introduction — Mac Firewall and Network Investigation Lab**
+Introduction — Mac Firewall and Network Investigation Lab
 
 In this lab, a real-world firewall and network investigation was performed using a personal MacBook Pro system to generate authentic network activity and security-related datasets. The purpose of this lab was to simulate the type of network visibility and traffic analysis commonly performed by SOC analysts, incident responders, and network security professionals in enterprise environments. Instead of relying on publicly available datasets, live system activity from the local machine was used to create realistic investigation data containing active network connections, listening services, encrypted traffic, local communication, and packet capture information.
 
@@ -70,19 +70,20 @@ Generate Real Data on Mac (Data Collection & Dataset Creation)\
 \
 Opening Terminal personal MacBook pro\
 \
-Step1-12 Live investigation & monitoring\**
+Step1-12 Live investigation & monitoring\
+
 We will investigate:
 
-interfaces,\
-IP addresses,\
-active connections,\
-listening ports,\
-HTTPS traffic,\
-packet captures,\
-live monitoring.
+interfaces
+IP addresses
+active connections
+listening ports
+HTTPS traffic
+packet captures
+live monitoring
 
 **Step 1 — Identify personal MacBook pro Network Interfaces\
-Command:** ifconfig**\**
+Command:** ifconfig
 \
 This shows:
 
@@ -93,40 +94,41 @@ active network adapters\
 \
 **Step 2 — Show Active Network Connections**\
 Command: netstat -an\
-\**
+\
 This displays:
 
-active TCP sessions,\
-listening ports,\
-remote IP connections,\
-UDP activity.
+active TCP sessions
+listening ports
+remote IP connections
+UDP activity
 
 **Step 3 — Show Listening Ports**\
-Command: **lsof -i -P -n\**
+Command: lsof -i -P -n
 \
 It shows:
 
-process name,\
-PID,\
-protocol,\
-local port,\
+process name
+PID
+protocol
+local port
 remote IP,\
-connection state.\
+connection state
 \
 Example:
 
 Google 1234 user TCP 192.168.1.193:51234-\>142.250.x.x:443
 
-It means: Chrome/Google process connected to remote HTTPS server on port 443.\
+It means: Chrome/Google process connected to remote HTTPS server on port 443
 \
-**Step 4 — Find Processes Listening on Ports**\
+**Step 4 — Find Processes Listening on Ports**
 
-Command: **lsof -iTCP -sTCP:LISTEN -n -P**\**
+Command: **lsof -iTCP -sTCP:LISTEN -n -P**
+
 This identifies:
 
-services listening on your machine,\
-potentially exposed ports,\
-applications accepting incoming connections.\
+services listening on your machine
+potentially exposed ports
+applications accepting incoming connections
 \
 **Step 5 — Investigate Specific Ports**
 
@@ -139,10 +141,10 @@ or
 
 This checks:
 
-HTTPS traffic,\
-SSH activity,\
-who owns the port,\
-active sessions.\
+HTTPS traffic
+SSH activity
+who owns the port
+active sessions
 \
 **Step 6 — Real-Time Connection Monitoring**
 
@@ -151,10 +153,9 @@ Command: **nettop**
 
 This gives live network activity:
 
-bandwidth usage,
-
-active connections,\
-process communication.
+bandwidth usage
+active connections
+process communication
 
 **Step 7 — Packet Capture (Very Important SOC Skill)**
 
@@ -162,10 +163,10 @@ Command: sudo tcpdump -i en0
 
 This captures:
 
-packets,\
-protocols,\
-IP addresses,\
-traffic flow.
+packets
+protocols
+IP addresses
+traffic flow
 
 **Step 8 — Capture Only HTTP/HTTPS Traffic**
 
@@ -179,9 +180,9 @@ For HTTP using command:
 
 This is useful for:
 
-suspicious outbound traffic,\
-malware traffic investigation,\
-encrypted traffic monitoring.\
+suspicious outbound traffic
+malware traffic investigation
+encrypted traffic monitoring
 \
 **Step 9 — Save Traffic to PCAP File**
 
@@ -192,11 +193,11 @@ This creates: **network_capture.pcap\
 \
 Can be analyzed by:**
 
-Wireshark,\
-tcpdump,\
-Splunk,\
-Zeek,\
-Suricata.
+Wireshark
+tcpdump
+Splunk
+Zeek
+Suricata
 
 **Step 10 — Detect External Connections**
 
@@ -206,9 +207,9 @@ This shows active remote connections.
 
 Useful for:
 
-suspicious IP investigation,\
-malware beaconing,\
-outbound communication analysis.\
+suspicious IP investigation
+malware beaconing
+outbound communication analysis
 \
 **Step 11 — Count Connections Per IP**
 
@@ -217,9 +218,9 @@ Command: **netstat -an \| grep ESTABLISHED \| awk '{print \$5}' \| cut -d. -f1-4
 
 This helps identify:
 
-top communicating IPs,\
-suspicious repetitive connections,\
-possible scanning or beaconing behavior.\
+top communicating IPs
+suspicious repetitive connections
+possible scanning or beaconing behavior
 \
 **Step 12 — Investigate DNS Activity**
 
@@ -228,11 +229,10 @@ Command: **sudo tcpdump -i en0 port 53**
 
 Very important for:
 
-malware detection,\
-command-and-control domains,\
-suspicious DNS traffic.\
-monitors DNS queries\
-\
+malware detection
+command-and-control domains
+suspicious DNS traffic
+monitors DNS queries
 \
 Step 13 through 17 Dataset generation\
 \
@@ -263,7 +263,6 @@ Command: lsof -i -P -n \> listening_ports.log\
 **ls -lh**\
 \
 \
-\
 **Step 17 — Create Packet Capture Dataset**
 
 Command: sudo tcpdump -i en0 -c 200 -w mac_network_capture.pcap\
@@ -279,7 +278,6 @@ mac_ifconfig.log\
 mac_netstat.log\
 listening_ports.log\
 mac_network_capture.pcap\
-\
 
 Please refer to the images in the repository for the corresponding commands and terminal output screenshots. 
 
@@ -294,9 +292,9 @@ Packet Analysis
 Traffic Inspection\
 Incident Response\
 Tier-1 SOC Analyst Skills\
-Basic Tier-2 Investigation\
+Basic Tier-2 Investigation
 
-\
+
 
 
 
